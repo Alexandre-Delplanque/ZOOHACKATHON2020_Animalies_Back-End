@@ -27,10 +27,6 @@ class AnimalPosition(object):
     @property
     def longitude(self):
         return self.record['location-l']
-    
-    @longitude.setter
-    def longitude(self, new_value):
-        self.record['location-l'] = new_value
 
     @property
     def latitude(self):
