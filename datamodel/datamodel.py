@@ -86,6 +86,15 @@ class PositionArea(DataFilter):
         return FilteredDataset([ \
             p for p in dataset.animal_positions \
             if self.is_in_area(p) ])
+    
+class IdDataFilter(DataFilter):
+    def __init__(self, id):
+        self.id = id
+    
+    def filter_dataset(self, dataset):
+        return FilteredDataset([ \
+            p for p in dataset.animal_positions \
+            if p.id == self.id])
 
 class Area(object):
     def __init__(self, border_positions):
