@@ -39,7 +39,7 @@ class mvmtMetrics(object):
         Return absolute angles between vectors.
         '''
         
-        p = points
+        p = self.points
 
         angles = []
         for i , (x1 , y1) in zip(range(len(p)),p):
@@ -68,7 +68,11 @@ class mvmtMetrics(object):
                 dot = ((x1-p[i-1][0])*(x2-x1)) + ((y1-p[i-1][1])*(y2-y1))
                 mod_1 = math.sqrt((x1-p[i-1][0])**2 + (y1-p[i-1][1])**2)
                 mod_2 = math.sqrt((x2-x1)**2 + (y2-y1)**2)
-                angle = math.degrees(math.acos(dot / (mod_1 * mod_2)))
+
+                if mod_1 != 0 and mod_2 != 0:
+                    angle = math.degrees(math.acos(dot / (mod_1 * mod_2)))
+                else:
+                    angle = 0
 
                 angles.append(angle)
 
