@@ -38,6 +38,13 @@ class AnimalPosition(object):
 
     def __str__(self):
         return f"{self.id} - {self.timestamp} - {self.longitude},{self.latitude}"
+    
+    def to_dict(self):
+        return {
+            "id" : self.id,
+            "latitude" : self.latitude,
+            "longitude" : self.longitude
+        }
 
 class DataFilter(object):
     def filter_dataset(dataset):
@@ -122,6 +129,10 @@ class DataSet(object):
     
     def filter(self, data_filter):
         return data_filter.filter_dataset(self)
+    
+    def __iter__(self):
+        for a in self.animal_positions:
+            yield a
 
 class DataSetFromShapeFile(DataSet):
     def __init__(self, animal_positions_shape_file_path, areas_shape_files_paths):
@@ -141,5 +152,5 @@ class FilteredDataset(DataSet):
         return self._animal_positions
     
 if __name__ == "__main__":
-    m = DataSetFromShapeFile("/home/julien/Documents/ZooHackathon/etosha_elephants/etosha_15_elephants", [])
+    m = DataSetFromShapeFile("/home/julien/Documents/ZooHackathon/etosha_15_elephant_3857/etosha_15_elephants_EPSG3857", [])
     print(m.animal_positions[0].timestamp)
